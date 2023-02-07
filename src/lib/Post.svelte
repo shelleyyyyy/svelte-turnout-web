@@ -12,7 +12,7 @@
 
 
 
-<div class="card bg-base-100 shadow-xl">
+<div class="card bg-base-100 w-96 shadow-xl">
     <!-- <figure><img src="https://www.vmi.edu/media/content-assets/images/academic-departments/computer-science/cydef/cydef/Corson.jpg" alt="Shoes" /></figure> -->
     <div class="card-body">
         <h2 class="card-title">

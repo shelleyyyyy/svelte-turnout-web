@@ -8,6 +8,9 @@
 
     let posts = []
 
+    let unsubscribe = () => {}
+
+
     onMount(async () => {
         const records = await pb.collection('posts').getFullList(200 /* batch size */, {
             sort: '-created',
@@ -16,11 +19,26 @@
 
         posts = records
 
-        console.log(posts)
+        // pb.collection('posts').subscribe('*', function (e) {
+        //     const user = await pb.collection('users').getOne(e.record.user)
+        //     e.record.expand = { user }
+        //     posts = [e.record, ...posts]
+        // });
 
-        pb.collection('posts').subscribe('*', function (e) {
-            posts = [e.record, ...posts]
-        });
+        unsubscribe = await pb
+            .collection('posts')
+            .subscribe('*', async ({ action, record }) => {
+
+                // Fetch associated user
+                const owner = await pb.collection('users').getOne(record.owner);
+                record.expand = { owner };
+                console.log(record)
+                posts = [record, ...posts];
+                
+                
+                // posts = posts.filter((m) => m.id !== record.id);
+                
+      });
     })
 
 </script>
