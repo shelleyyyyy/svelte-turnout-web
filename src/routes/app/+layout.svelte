@@ -6,7 +6,8 @@
 
 
 <div>
-
-    <NavBar/>
+    <div class="fixed w-full">
+        <NavBar/>
+    </div>
     <slot/>
 </div>

@@ -42,7 +42,6 @@
     </div>
 
     <div>
-        <h1 class="p-3">Description</h1>
         <button class="btn w-full" on:click={submitPost}>Submit</button>
     </div>
 </div>
