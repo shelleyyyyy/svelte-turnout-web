@@ -11,9 +11,12 @@
     onMount(async () => {
         const records = await pb.collection('posts').getFullList(200 /* batch size */, {
             sort: '-created',
+            expand: 'owner'
         });
 
         posts = records
+
+        console.log(posts)
 
         pb.collection('posts').subscribe('*', function (e) {
             posts = [e.record, ...posts]
@@ -26,7 +29,7 @@
 <div class="grid justify-items-center gap-5 p-5">
     <div class="grid gap-5">
         {#each posts as p}
-            <Post title={p.title} description={p.description} tags={p.tags} owner={p.owner}/>
+            <Post title={p.title} description={p.description} tags={p.tags} owner={p.expand.owner.username}/>
         {/each}
     </div>
     <div class="mb-96"></div>
